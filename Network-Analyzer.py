@@ -13,11 +13,7 @@ DATA_TAB_3 = '\t\t\t '
 DATA_TAB_4 = '\t\t\t\t '
 
 def main():
-    conn = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP)
-    HOST = socket.gethostbyname(socket.gethostname())
-    conn.bind((HOST, 0))
-    conn.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
-    conn.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
+    conn = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
 
     while True:
         raw_data, addr = conn.recvfrom(65536)
